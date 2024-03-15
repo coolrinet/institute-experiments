@@ -14,9 +14,10 @@ return new class extends Migration
   public function up(): void
   {
     Schema::create('experiment_outputs', function (Blueprint $table) {
-      $table->foreignIdFor(Experiment::class);
-      $table->foreignIdFor(ExperimentParam::class, 'param_id');
-      $table->double('value');
+      $table->foreignIdFor(Experiment::class)->constrained('experiments');
+      $table->foreignIdFor(ExperimentParam::class, 'param_id')
+        ->constrained('experiment_params');
+      $table->decimal('value');
 
       $table->primary(['experiment_id', 'param_id']);
     });

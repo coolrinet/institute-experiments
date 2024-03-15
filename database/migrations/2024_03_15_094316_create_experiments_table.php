@@ -16,7 +16,7 @@ return new class extends Migration
       $table->id();
       $table->string('name')->unique();
       $table->date('date');
-      $table->foreignIdFor(Machinery::class);
+      $table->foreignIdFor(Machinery::class)->constrained('machineries');
     });
   }
 

@@ -14,8 +14,9 @@ return new class extends Migration
   public function up(): void
   {
     Schema::create('experiment_quality_inputs', function (Blueprint $table) {
-      $table->foreignIdFor(Experiment::class);
-      $table->foreignIdFor(ExperimentParam::class, 'param_id');
+      $table->foreignIdFor(Experiment::class)->constrained('experiments');
+      $table->foreignIdFor(ExperimentParam::class, 'param_id')
+        ->constrained('experiment_params');
       $table->string('value');
 
       $table->primary(['experiment_id', 'param_id']);

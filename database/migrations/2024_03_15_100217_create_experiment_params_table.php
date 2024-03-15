@@ -17,7 +17,9 @@ return new class extends Migration
       $table->string('name')->unique();
       $table->boolean('is_output')->default(false);
       $table->boolean('is_quantitative')->default(true);
-      $table->foreignIdFor(Machinery::class)->nullable();
+      $table->foreignIdFor(Machinery::class)
+        ->nullable()
+        ->constrained('machineries');
     });
   }
 
