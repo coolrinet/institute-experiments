@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/Components/ui/card';
 import { Separator } from '@/Components/ui/separator';
 import { Head, Link } from '@inertiajs/react';
+import { Fragment } from 'react/jsx-runtime';
 
 type PageProps = {
   experiment: App.Data.ExperimentData;
@@ -41,12 +42,12 @@ export default function Show(props: PageProps) {
           </CardHeader>
           <CardContent>
             {inputParams.map((param) => (
-              <>
-                <p className='py-3' key={param.paramDetail.id}>
+              <Fragment key={param.paramDetail.id}>
+                <p className='py-3'>
                   <span className='font-medium'>{param.paramDetail.name}:</span> {param.value}
                 </p>
                 <Separator />
-              </>
+              </Fragment>
             ))}
           </CardContent>
         </Card>
@@ -57,12 +58,12 @@ export default function Show(props: PageProps) {
           </CardHeader>
           <CardContent>
             {outputParams.map((param) => (
-              <>
-                <p className='py-3' key={param.paramDetail.id}>
+              <Fragment key={param.paramDetail.id}>
+                <p className='py-3'>
                   <span className='font-medium'>{param.paramDetail.name}:</span> {param.value}
                 </p>
                 <Separator />
-              </>
+              </Fragment>
             ))}
           </CardContent>
         </Card>
