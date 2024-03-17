@@ -16,15 +16,17 @@ type HeaderProps = {
 export default function Header({ navRoutes, ...props }: HeaderProps) {
   return (
     <header className='bg-blue-300 py-4' {...props}>
-      <NavigationMenu className='mx-auto'>
-        <NavigationMenuList>
+      <NavigationMenu className='container'>
+        <NavigationMenuList className='gap-3'>
           {navRoutes.map((item) => (
             <NavigationMenuItem key={item.name}>
-              <Link href={route(item.name)}>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  {item.linkText}
-                </NavigationMenuLink>
-              </Link>
+              <NavigationMenuLink
+                asChild={true}
+                active={route(item.name) === location.href}
+                className={navigationMenuTriggerStyle()}
+              >
+                <Link href={route(item.name)}>{item.linkText}</Link>
+              </NavigationMenuLink>
             </NavigationMenuItem>
           ))}
         </NavigationMenuList>
