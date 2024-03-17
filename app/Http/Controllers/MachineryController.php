@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Data\MachineryData;
 use App\Models\Machinery;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,11 @@ class MachineryController extends Controller
    */
   public function index()
   {
-    //
+    $machineries = MachineryData::collect(Machinery::all());
+
+    return inertia('Machineries/Index', [
+      'machineries' => $machineries,
+    ]);
   }
 
   /**
