@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Data\ExperimentData;
 use App\Models\Experiment;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,11 @@ class ExperimentController extends Controller
    */
   public function index()
   {
-    //
+    $experiments = ExperimentData::collect(Experiment::all());
+
+    return inertia('Experiments/Index', [
+      'experiments' => $experiments,
+    ]);
   }
 
   /**
