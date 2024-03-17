@@ -1,6 +1,6 @@
 import { RouteList } from 'ziggy-js';
 
-type Route = {
+export type Route = {
   linkText: string;
   name: keyof RouteList;
 };
