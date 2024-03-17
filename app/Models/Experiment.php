@@ -68,11 +68,11 @@ class Experiment extends Model
   public function inputs(): Collection
   {
     $quantitative_inputs = $this->quantitative_inputs()
-      ->with('machinery_param:id,name')
+      ->with('experiment_param:id,name')
       ->get();
 
     $quality_inputs = $this->quality_inputs()
-      ->with('machinery_param:id,name')
+      ->with('experiment_param:id,name')
       ->get();
 
     return $quantitative_inputs->concat($quality_inputs);

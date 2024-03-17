@@ -6,7 +6,7 @@ export default function Layout({ children }: PropsWithChildren) {
   return (
     <>
       <Header navRoutes={navRoutes} />
-      <main className='container pt-5'>{children}</main>
+      <main className='container py-5'>{children}</main>
     </>
   );
 }
