@@ -1,5 +1,5 @@
 import { useMediaQuery } from '@/hooks/useMediaQuery';
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -28,6 +28,8 @@ function BurgerMenu({ children }: PropsWithChildren) {
 export default function NavMenu({ navRoutes, className, ...props }: NavMenuProps) {
   const isDesktop = useMediaQuery('(min-width: 768px)');
 
+  const { url } = usePage();
+
   return isDesktop ? (
     <NavigationMenu className={cn('mx-auto', className)} {...props}>
       <NavigationMenuList>
@@ -35,7 +37,7 @@ export default function NavMenu({ navRoutes, className, ...props }: NavMenuProps
           <NavigationMenuItem key={item.name}>
             <NavigationMenuLink
               asChild={true}
-              active={route(item.name) === location.href}
+              active={route(item.name).endsWith(url.split('?')[0])}
               className={navigationMenuTriggerStyle()}
             >
               <Link href={route(item.name)}>{item.linkText}</Link>

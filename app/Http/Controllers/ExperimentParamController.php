@@ -14,11 +14,23 @@ class ExperimentParamController extends Controller
   public function index()
   {
     $experiment_params = ExperimentParamDetailData::collect(
-      ExperimentParam::with('machinery')->get()
+      ExperimentParam::with('machinery')->paginate(6)
     );
 
+    $links = null;
+
+    if ($experiment_params->hasPages()) {
+      $links = array_values(
+        $experiment_params
+          ->getUrlRange(1, $experiment_params->lastPage())
+      );
+    }
+
     return inertia('ExperimentParams/Index', [
-      'experimentParams' => $experiment_params
+      'experimentParams' => $experiment_params->items(),
+      'links' => $links,
+      'nextUrl' => $experiment_params->nextPageUrl(),
+      'prevUrl' => $experiment_params->previousPageUrl(),
     ]);
   }
 
