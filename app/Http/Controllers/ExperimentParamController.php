@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Data\ExperimentParamDetailData;
 use App\Models\ExperimentParam;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,13 @@ class ExperimentParamController extends Controller
    */
   public function index()
   {
-    //
+    $experiment_params = ExperimentParamDetailData::collect(
+      ExperimentParam::with('machinery')->get()
+    );
+
+    return inertia('ExperimentParams/Index', [
+      'experimentParams' => $experiment_params
+    ]);
   }
 
   /**
